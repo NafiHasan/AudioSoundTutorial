@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureSoundActivityButton();
         configureCustomSoundButton();
+        configurePlayFromWebButton();
     }
 
     private void configureSoundActivityButton(){
@@ -36,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+            }
+        });
+    }
+
+    private void configurePlayFromWebButton(){
+        Button playFromWeb = findViewById(R.id.virtualButtonId);
+
+        playFromWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,VirtualAudio.class));
             }
         });
     }
