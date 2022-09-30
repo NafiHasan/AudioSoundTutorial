@@ -52,7 +52,7 @@ public class SoundEffectActivity extends AppCompatActivity {
         effect1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                soundPool.play(sound1, 1, 1, 1, 0, 1);
+                soundPool.play(sound1, 0, 1, 1, 0, 1);
             }
         });
 
