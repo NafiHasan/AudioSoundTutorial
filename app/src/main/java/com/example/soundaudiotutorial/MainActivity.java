@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureSoundActivityButton();
+        configureCustomSoundButton();
     }
 
     private void configureSoundActivityButton(){
@@ -23,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SoundEffectActivity.class));
+            }
+        });
+    }
+
+    private void configureCustomSoundButton()
+    {
+        Button customSoundActivity = findViewById(R.id.tryCustomNotificationSound);
+
+        customSoundActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
             }
         });
     }
