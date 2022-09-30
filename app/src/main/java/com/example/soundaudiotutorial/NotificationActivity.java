@@ -34,41 +34,27 @@ public class NotificationActivity extends AppCompatActivity {
         getNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String CHANNEL_ID = "1234";
-                Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+ "://" + getApplicationContext().getPackageName() + "/" + R.raw.iphone_ringtone);
-                NotificationManager nManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                String CHANNEL_ID = "my_Channel";
+                Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+ "://" + getApplicationContext().getPackageName() + "/raw/iphone_ringtone.mp3");
+                NotificationManager manager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 {
                     NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "My Notification", NotificationManager.IMPORTANCE_HIGH);
-                    channel.setLightColor(Color.BLUE);
-                    channel.enableLights(true);
-
-                    channel.setDescription(" ");
-
                     AudioAttributes audioAttributes = new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).setUsage(AudioAttributes.USAGE_NOTIFICATION).build();
                     channel.setSound(soundUri, audioAttributes);
-
-                    if(nManager != null)
-                    {
-                        nManager.createNotificationChannel(channel);
-                    }
-
+                    manager.createNotificationChannel(channel);
                 }
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID);
-                builder.setContentText("My Notification");
-                builder.setWhen(System.currentTimeMillis());
                 builder.setContentTitle(getString(R.string.app_name));
-                builder.setDefaults(Notification.DEFAULT_LIGHTS);
+                builder.setContentText("iPhone Ringtone Playing");
+                builder.setWhen(System.currentTimeMillis());
                 builder.setSmallIcon(R.drawable.ic_launcher_background);
-                builder.setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+ "://" + getApplicationContext().getPackageName() + "/" + R.raw.iphone_ringtone));
-                builder.setAutoCancel(true);
+                builder.setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+ "://" + getApplicationContext().getPackageName() + "/raw/iphone_ringtone.mp3"));
 
-
-                //NotificationManagerCompat managerCompat = NotificationManagerCompat.from(NotificationActivity.this);
-                nManager.notify(1, builder.build());
+                manager.notify(1, builder.build());
             }
         });
     }
